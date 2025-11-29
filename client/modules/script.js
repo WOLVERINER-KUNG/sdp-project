@@ -15,6 +15,12 @@ const AppState = {
 };
 
 function handleLogin(email, password, role) {
+    // Email validation - must contain @ and valid domain
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert('Please enter a valid email address (e.g., user@gmail.com)');
+    return false;
+  }
   if (email && password) {
     AppState.currentUser = email;
     AppState.currentRole = role;
