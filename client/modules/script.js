@@ -15,13 +15,19 @@ const AppState = {
 };
 
 function handleLogin(email, password, role) {
-    // Email validation - must contain @ and valid domain
+  // Strict validation: Check all fields are filled and email has @ symbol
+  if (!email || !password || !role) {
+    alert('All fields are required: Email, Password, and Role');
+    return false;
+  }
+  if (!email.includes('@')) {
+    alert('Email must contain @ symbol (e.g., user@gmail.com)');
+    return false;
+  }
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     alert('Please enter a valid email address (e.g., user@gmail.com)');
     return false;
-  }
-  if (email && password) {
     AppState.currentUser = email;
     AppState.currentRole = role;
     localStorage.setItem('currentUser', email);
