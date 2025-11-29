@@ -197,5 +197,34 @@
   function logout() { showLogin(); }
   
   showLogin();
+
+    // Update issue status
+  function updateIssueStatus(issueId, newStatus) {
+    const issues = loadIssues();
+    const issue = issues.find(i => i.id === issueId);
+    if (issue) {
+      issue.status = newStatus;
+      saveIssues(issues);
+      alert('Issue status updated to: ' + newStatus);
+      showDashboard();
+    }
+  }
+  
+  // Add response to issue
+  function addResponse(issueId) {
+    const response = prompt('Enter your response:');
+    if (response) {
+      const issues = loadIssues();
+      const issue = issues.find(i => i.id === issueId);
+      if (issue) {
+        issue.response = response;
+        issue.respondedBy = currentUser.name;
+        issue.respondedAt = new Date().toLocaleString();
+        saveIssues(issues);
+        alert('Response added successfully!');
+        showDashboard();
+      }
+    }
+  }
 </script>
 </html>
