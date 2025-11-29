@@ -77,6 +77,12 @@ const LoginComponent = ({ onLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+        // Email validation - must contain @ and valid domain
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address (e.g., user@gmail.com)');
+      return;
+    }
     if (email && role) {
       onLogin(email, role);
     }
