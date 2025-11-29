@@ -77,17 +77,21 @@ const LoginComponent = ({ onLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-        // Email validation - must contain @ and valid domain
+            // Strict validation: Check all fields are filled and email has @ symbol
+    if (!email || !role) {
+      alert('All fields are required: Email and Role must be filled');
+      return;
+    }
+    if (!email.includes('@')) {
+      alert('Email must contain @ symbol (e.g., user@gmail.com)');
+      return;
+    }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert('Please enter a valid email address (e.g., user@gmail.com)');
       return;
+    onLogin(email, role);
     }
-    if (email && role) {
-      onLogin(email, role);
-    }
-  };
-
   return (
     <div className="login-container">
       <div className="login-box">
