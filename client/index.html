@@ -77,6 +77,9 @@
         const email = document.getElementById('email').value;
         const role = document.getElementById('role').value;
         if (!email || !role) { alert('Please fill in all fields'); return; }
+            if (!email.includes('@')) { alert('Email must contain @ symbol (e.g., user@gmail.com)'); return; }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) { alert('Please enter a valid email address (e.g., user@gmail.com)'); return; }
         currentUser = { role, name: email.split('@')[0] };
         showDashboard();
     }
